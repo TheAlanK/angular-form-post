@@ -1,4 +1,6 @@
+import { RequisicoesService } from './../shared/requisicoes.service';
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-form',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormComponent implements OnInit {
 
-  constructor() { }
+  texto = new FormControl('');
+  constructor(public service: RequisicoesService) { }
 
   ngOnInit(): void {
   }
 
+  onSubmit(){
+    console.log(this.texto.value)
+    this.service.enviar(this.texto.value).subscribe(texto => {
+      texto = this.texto.value;
+    });
+  }
 }
